@@ -144,10 +144,13 @@ COLS_NUMERICAS = [
     'anio', 'mes', 'cant_keywords',
 ]
 COLS_BINARIAS = ['budget_desconocido', 'revenue_desconocido', 'sin_keywords']
+# `director` no se usa por defecto: en el árbol se probaron frequency y target encoding
+# y no mejoraron el AUC (0.767 vs 0.768, dentro del desvío). Se dejan las variantes por si
+# se quiere probar con otro modelo.
 VARIANTES_DIRECTOR = ('ninguno', 'freq', 'freq+target')
 
 
-def crear_preprocesador(director='freq+target'):
+def crear_preprocesador(director='ninguno'):
     """Capa 2: ColumnTransformer que se ajusta dentro de cada fold.
 
     director: 'ninguno' | 'freq' | 'freq+target'
@@ -177,12 +180,18 @@ def crear_preprocesador(director='freq+target'):
     return ColumnTransformer(transformadores, remainder='drop', verbose_feature_names_out=False)
 
 
-def crear_pipeline(modelo, director='freq+target'):
+def crear_pipeline(modelo, director='ninguno'):
     """Une el preprocesador y el modelo, así la CV reajusta todo en cada fold."""
     return Pipeline([
         ('prep', crear_preprocesador(director)),
         ('modelo', modelo),
     ])
+
+
+def entrenar(modelo, X, y, director='ninguno'):
+    """Entrena preprocesador + modelo con TODO el train (para analizar el modelo final
+    o predecir el test). Devuelve el Pipeline ya entrenado."""
+    return crear_pipeline(modelo, director).fit(X, y)
 
 
 # ---------------------------------------------------------------------------
@@ -194,7 +203,7 @@ def crear_cv():
     return StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
 
 
-def evaluar(modelo, X, y, director='freq+target', **info):
+def evaluar(modelo, X, y, director='ninguno', **info):
     """Evalúa un modelo con k-fold CV y devuelve un dict con las métricas.
 
     Para cada métrica devuelve el promedio y el desvío entre folds en validación,
@@ -220,7 +229,7 @@ def evaluar(modelo, X, y, director='freq+target', **info):
     return fila
 
 
-def matriz_confusion(modelo, X, y, director='freq+target', titulo=None, ax=None):
+def matriz_confusion(modelo, X, y, director='ninguno', titulo=None, ax=None):
     """Matriz de confusión con las predicciones de validación de cada fold
     (cada película se predice con el modelo que no la vio al entrenar)."""
     pipe = crear_pipeline(modelo, director)
@@ -233,10 +242,9 @@ def matriz_confusion(modelo, X, y, director='freq+target', titulo=None, ax=None)
     return cm
 
 
-def generar_submission(modelo, X, y, X_test, ids_test, archivo, director='freq+target'):
+def generar_submission(modelo, X, y, X_test, ids_test, archivo, director='ninguno'):
     """Entrena con todo el train y guarda las PROBABILIDADES de la clase 1 para Kaggle."""
-    pipe = crear_pipeline(modelo, director)
-    pipe.fit(X, y)
+    pipe = entrenar(modelo, X, y, director)
     proba = pipe.predict_proba(X_test)[:, 1]
     sub = pd.DataFrame({'id': ids_test, TARGET: proba})
     sub.to_csv(archivo, index=False)

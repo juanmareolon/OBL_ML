@@ -1,0 +1,2 @@
+modelo,hiperparametros,auc_cv,auc_cv_std,auc_train,accuracy,precision,recall,f1,auc_kaggle
+Árbol de clasificación,"max_depth=8, min_samples_leaf=50, criterion=gini",0.769028919714758,0.013019413886059143,0.8132228946496911,0.6973967483433503,0.7047250125459609,0.6687751226459883,0.6852620326204129,0.77058
