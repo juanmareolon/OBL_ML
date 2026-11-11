@@ -1,0 +1,2 @@
+modelo,hiperparametros,auc_cv,auc_cv_std,auc_train,accuracy,precision,recall,f1,auc_kaggle
+Random Forest,"n_estimators=300, max_depth=15, min_samples_leaf=5, max_features=sqrt",0.8245433628874512,0.011286542607617089,0.9601386516511482,0.7429187856372323,0.7614114893480839,0.6979981009653425,0.728175372269466,0.84439
