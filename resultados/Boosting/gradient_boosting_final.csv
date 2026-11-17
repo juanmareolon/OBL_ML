@@ -1,0 +1,2 @@
+modelo,hiperparametros,auc_cv,auc_cv_std,auc_train,accuracy,precision,recall,f1,auc_kaggle
+Gradient Boosting,"max_depth=3, n_estimators=300, learning_rate=0.05, subsample=0.8",0.8358049195350885,0.0125014593005645,0.925902333928508,0.7515202650639543,0.7664556075411058,0.7148646937806615,0.7395777095318127,0.84086

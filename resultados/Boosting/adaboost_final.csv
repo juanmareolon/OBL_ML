@@ -1,0 +1,2 @@
+modelo,hiperparametros,auc_cv,auc_cv_std,auc_train,accuracy,precision,recall,f1,auc_kaggle
+AdaBoost,"max_depth=3, n_estimators=500, learning_rate=0.5",0.830529067974106,0.0128264607617745,0.8918689712917584,0.7509650947757743,0.7632270053237373,0.7193622408608956,0.7404021710422484,0.8343
