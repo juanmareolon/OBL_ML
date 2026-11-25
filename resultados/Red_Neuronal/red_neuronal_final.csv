@@ -1,0 +1,2 @@
+modelo,hiperparametros,auc_cv,auc_cv_std,auc_train,accuracy,precision,recall,f1,auc_kaggle
+Red neuronal,"capas=128-64-32, dropout=0.5, learning_rate=0.001, batch_size=32, early_stopping (paciencia 30)",0.8323607133024404,0.0108968771319758,0.8714892438413256,0.7479199414393589,0.8025777285950111,0.6496281057129293,0.717417934630944,0.83664
