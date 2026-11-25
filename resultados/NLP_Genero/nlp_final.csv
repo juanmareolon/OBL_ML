@@ -1,0 +1,2 @@
+modelo,preprocesamiento,C,class_weight,accuracy,accuracy_std,precision,precision_std,recall,recall_std,f1,f1_std,f1_train
+Regresión logística + TF-IDF + numéricas,lematización (WordNet + POS),2,balanced,0.44614655570966255,0.027245847811207077,0.33375731254091434,0.03829783058798678,0.3563847788540291,0.03384647478250021,0.33608574925168816,0.03387398169774033,0.8771967266928143
