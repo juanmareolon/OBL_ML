@@ -1,4 +1,4 @@
-# Obligatorio Machine Learning para Sistemas Inteligentes (2026, S2)
+# Obligatorio Machine Learning para Sistemas Inteligentes
 
 Obligatorio de la materia Machine Learning para Sistemas Inteligentes, sobre un conjunto de datos de películas. Tiene dos tareas:
 
