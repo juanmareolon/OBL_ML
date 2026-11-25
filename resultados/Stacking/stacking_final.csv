@@ -1,0 +1,2 @@
+modelo,hiperparametros,auc_cv,auc_cv_std,auc_train,accuracy,precision,recall,f1,auc_kaggle
+Stacking,"base: logistica (C=1) + random forest (300, depth 15, leaf 5, sqrt) + gradient boosting (300, depth 3, lr 0.05, subsample 0.8) + red (128-64-32, dropout 0.5); meta: logistica (C=1); cv interna 5 folds",0.8400148856697328,0.009788659926094985,0.9135183903907957,0.7548547541994144,0.7774283918903798,0.7058648520335497,0.7396660575922149,0.84568
